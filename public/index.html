@@ -1,10 +1,28 @@
-<!doctype html>
+<!DOCTYPE html>
 <html>
-<head>
-    <title></title>
-</head>
-<body>
-    <script src="/js/vue.js"></script>
-    <script src="/js/axios.min.js"></script>
-</body>
+    <head>
+        <title>Imageboard</title>
+        <link rel="stylesheet" href="style.css" />
+    </head>
+    <body>
+  
+
+        <div id="main">
+<!-- <h2>the best cohort is {{name}}</h2>
+<h2 v-if="seen"> can you see me?</h2>
+<h2 v-else> no i cant see you</h2> -->
+<ul class="imageList">
+    <li v-for="image in images" @click="myFunction"><p id="title">{{image.title}}<p><img :src='image.url'> </li>
+</ul>
+        </div>
+
+
+
+
+
+
+        <script src="/js/vue.js"></script>
+        <script src="/js/axios.min.js"></script>
+        <script src="/js/script.js"></script>
+    </body>
 </html>
