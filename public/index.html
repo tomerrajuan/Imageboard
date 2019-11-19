@@ -3,25 +3,31 @@
     <head>
         <title>Imageboard</title>
         <link rel="stylesheet" href="style.css" />
+        <script src="/js/vue.js"></script>
     </head>
     <body>
-  
+<header>
 
-        <div id="main">
+</header>
+
+<div id="main">
+    <form class="upload">
+        <input id="inputfield" v-model="title" type="text" name="title" placeholder="title">
+        <input id="inputfield" v-model="description" type="text" name="description" placeholder="description">
+        <input id="inputfield" v-model="username" type="text" name="username" placeholder="username" >
+        <input id="choosefile" @change="handleChange" type="file" name="file" accept="image/*">
+        <button id="upload" @click.prevent.default="handleClick">Upload</button>
+    </form>
 <!-- <h2>the best cohort is {{name}}</h2>
 <h2 v-if="seen"> can you see me?</h2>
 <h2 v-else> no i cant see you</h2> -->
 <ul class="imageList">
-    <li v-for="image in images" @click="myFunction"><p id="title">{{image.title}}<p><img :src='image.url'> </li>
+
+    <li v-for="image in images" @click="myFunction"><div class="black"></div><p id="title">{{image.title}}<p><img :src='image.url'> </li>
 </ul>
         </div>
 
 
-
-
-
-
-        <script src="/js/vue.js"></script>
         <script src="/js/axios.min.js"></script>
         <script src="/js/script.js"></script>
     </body>
