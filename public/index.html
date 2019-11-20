@@ -6,29 +6,80 @@
         <script src="/js/vue.js"></script>
     </head>
     <body>
-<header>
+        <header></header>
 
-</header>
+        <div id="main">
+            <my-component v-if="currentImage" v-bind:id="currentImage"
+                v-on:close="currentImage=null">
+            </my-component>
 
-<div id="main">
-    <form class="upload">
-        <input id="inputfield" v-model="title" type="text" name="title" placeholder="title">
-        <input id="inputfield" v-model="description" type="text" name="description" placeholder="description">
-        <input id="inputfield" v-model="username" type="text" name="username" placeholder="username" >
-        <input id="choosefile" @change="handleChange" type="file" name="file" accept="image/*">
-        <button id="upload" @click.prevent.default="handleClick">Upload</button>
-    </form>
-<!-- <h2>the best cohort is {{name}}</h2>
-<h2 v-if="seen"> can you see me?</h2>
-<h2 v-else> no i cant see you</h2> -->
-<ul class="imageList">
+            <form class="upload">
+                <input
+                    id="inputfield"
+                    v-model="title"
+                    type="text"
+                    name="title"
+                    placeholder="title"
+                />
+                <input
+                    id="inputfield"
+                    v-model="description"
+                    type="text"
+                    name="description"
+                    placeholder="description"
+                />
+                <input
+                    id="inputfield"
+                    v-model="username"
+                    type="text"
+                    name="username"
+                    placeholder="username"
+                />
+                <input
+                    id="choosefile"
+                    @change="handleChange"
+                    type="file"
+                    name="file"
+                    accept="image/*"
+                />
+                <button id="upload" @click.prevent.default="handleClick">
+                    Upload
+                </button>
+            </form>
 
-    <li v-for="image in images" @click="myFunction"><div class="black"></div><p id="title">{{image.title}}<p><img :src='image.url'> </li>
-</ul>
+            <ul class="imageList">
+                <li v-for="image in images" @click="setCurrentImage(image.id)">
+                    <div class="black"></div>
+                    <p id="title">{{image.title}}</p>
+                    <p>
+                        <img :src="image.url" />
+                    </p>
+                </li>
+            </ul>
         </div>
 
+        <script type="text/javascript" id="my-template">
+            <div class="modal_container">
 
+                       <a id="x" href="javascript://" @click="unsetCurrentImage">x</a>
+                       <img id="modal_img" :src="url">
+
+                             <h1 id="modal_title">{{title}}</h1>
+                             <h3 id="modal_username">{{username}}</h3>
+                             <h3 id="modal_description">{{description}}</h3>
+
+                            <div class="comments">
+                               <input id="inputfield_username" type="text" name="username" placeholder="username"></input>
+                               <input id="inputfield_comments" type="text" name="comment" placeholder="your comment"></input>
+                               <button id="comment" @click="addComment(image.id)">
+                                   Comment
+                               </button>
+                      </div>
+
+                </div>
+        </script>
         <script src="/js/axios.min.js"></script>
         <script src="/js/script.js"></script>
+        <script src="/js/components.js"></script>
     </body>
 </html>

@@ -3,21 +3,25 @@
 header {
     height: 50px;
 }
+
 .imageList {
+    margin-right: 5%;
     list-style-type: none;
     display: grid;
-    grid-template-columns: repeat(6, 1fr);
+    grid-template-columns: repeat(5, 1fr);
     grid-template-rows: repeat(12, 1fr);
-    grid-gap: 15px;
+    grid-gap: 10px;
+    margin-left: 2%;
 }
 
 img {
-    border: 1px solid black;
+    border: 2px solid black;
     border-radius: 5px;
     box-shadow: 1px 1px 1px;
-    height: 170px;
-    width: 170px;
+    height: 260px;
+    width: 260px;
     object-fit: cover;
+
 }
 
 #title {
@@ -25,23 +29,25 @@ img {
     position: absolute;
     padding-top: 5px;
     padding-left: 7px;
-    font-size: 16px;
-    width: 160px;
+    font-size: 15px;
+    width: 240px;
     color: white;
     font-weight: bold;
 }
 .black {
-    height: 30px;
-    width: 172px;
+    height: 35px;
+    width: 262px;
     background: black;
     position: absolute;
     padding-top: 15px;
     opacity: 0.3;
+    z-index: 200;
     margin-top: 16px;
+        z-index: 50;
 }
 .upload {
     display: flex;
-    background: #f4efd3;
+    background: #bd574e;
     height: 80px;
     width: 100%;
     align-items: center;
@@ -51,15 +57,17 @@ img {
 #inputfield {
     border: 1px solid black;
     border-radius: 4px;
-    height: 20px;
+    height: 24px;
     padding-left: 7px;
     margin-right: 8px;
     box-shadow: 1px 1px black;
+    font-size: 15px;
+
 }
 #choosefile {
     cursor: pointer;
     margin-left: 1%;
-    font-size: 12px;
+    font-size: 14px;
     color:blue;
     font-family: sans-serif;
 
@@ -70,5 +78,55 @@ img {
     height: 20px;
     width: 80px;
     box-shadow: 1px 1px 1px;
+}
+
+/* MODAL POP UP */
+
+.modal_container{
+    position: absolute;
+    margin-top: -50px;
+    height: 100vh;
+    width: 100%;
+    background-color:rgba(0, 0, 0, 0.95);
+z-index: 100;
+}
+
+
+#modal_img{
+    border: 2px solid black;
+    border-radius: 5px;
+    box-shadow: 1px 1px 1px;
+    height: 500px;
+    width: 500px;
+    object-fit: cover;
+margin-top: 5%;
+
+}
+
+#modal_title{
+    font-family: sans-serif;
+    padding-top: 5px;
+    padding-left: 7px;
+    font-size: 20px;
+    width: 240px;
+    color: white;
+    font-weight: bold;
+}
+
+#modal_username{}
+
+#modal_description{}
+#x{
+    font-size: 100px;
+    color: white;
+    position: absolute;
+    z-index: 700;
+}
+#inputfield_username{
+
+
+}
+
+#inputfield_comments{
 
 }

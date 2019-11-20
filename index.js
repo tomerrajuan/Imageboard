@@ -26,10 +26,11 @@ const uploader = multer({
 });
 
 app.use(express.static("./public"));
+app.use(express.json());
+
 
 app.post("/upload", uploader.single("file"), s3.upload, (req, res) => {
     const { title, description, username} = req.body;
-    console.log("req.file is:", req.file.filename);
     const url = `${s3Url}${req.file.filename}`;
     db.addImage(title, description, username, url).then(({ rows }) =>
         res.json({
@@ -44,10 +45,30 @@ app.get("/images", (req, res) => {
     console.log("we are at images");
 
     db.getImages().then(results => {
-        console.log("results are", results);
         let images = results.rows;
         res.json(images);
     });
 });
+
+app.get("/image/:id", (req, res) => {
+    console.log("we are at image/ id");
+    let id= req.params.id;
+    db.getSingleImage(id).then(results => {
+        console.log("single image id: ",results);
+        let image = results.rows;
+        res.json(image);
+    });
+});
+
+app.post("/comment/:id", (req, res) => {
+    console.log("we are at comment");
+    let id= req.params.id;
+    db.addComment(id).then(results => {
+        console.log("single image id: ",results);
+        let comment = results.rows;
+        res.json(comment);
+    });
+});
+
 
 app.listen(8080, () => console.log("images board listening"));
