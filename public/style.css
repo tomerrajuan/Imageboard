@@ -1,4 +1,5 @@
 * {
+    /* background: #ffffc5; */
 }
 header {
     height: 50px;
@@ -8,18 +9,18 @@ header {
     margin-right: 5%;
     list-style-type: none;
     display: grid;
-    grid-template-columns: repeat(5, 1fr);
+    grid-template-columns: repeat(4, 1fr);
     grid-template-rows: repeat(12, 1fr);
-    grid-gap: 10px;
-    margin-left: 2%;
+    margin-left: 5%;
+
 }
 
 img {
     border: 2px solid black;
-    border-radius: 5px;
-    box-shadow: 1px 1px 1px;
-    height: 260px;
-    width: 260px;
+    border-radius: 3px;
+    box-shadow: 2px 2px 2px;
+    height: 290px;
+    width: 290px;
     object-fit: cover;
 
 }
@@ -29,30 +30,34 @@ img {
     position: absolute;
     padding-top: 5px;
     padding-left: 7px;
-    font-size: 15px;
+    font-size: 20px;
     width: 240px;
     color: white;
     font-weight: bold;
 }
 .black {
-    height: 35px;
-    width: 262px;
+    height: 65px;
+    width: 292px;
     background: black;
     position: absolute;
     padding-top: 15px;
-    opacity: 0.3;
+    opacity: 0.5;
     z-index: 200;
     margin-top: 16px;
         z-index: 50;
 }
 .upload {
     display: flex;
-    background: #bd574e;
+    background: #f9f9f9;
     height: 80px;
     width: 100%;
     align-items: center;
     justify-content: center;
     border: 1px solid black;
+    border-radius: 5px;
+}
+.inputs{
+    margin-left: -4%;
 }
 #inputfield {
     border: 1px solid black;
@@ -74,15 +79,15 @@ img {
 }
 #upload {
     cursor: pointer;
-    margin-left: -4%;
     height: 20px;
     width: 80px;
     box-shadow: 1px 1px 1px;
+
 }
 
 /* MODAL POP UP */
 
-.modal_container{
+.modalContainer{
     position: absolute;
     margin-top: -50px;
     height: 100vh;
@@ -113,20 +118,26 @@ margin-top: 5%;
     font-weight: bold;
 }
 
-#modal_username{}
 
-#modal_description{}
 #x{
     font-size: 100px;
     color: white;
     position: absolute;
     z-index: 700;
 }
-#inputfield_username{
-
+#titleComments {
+    font-family: sans-serif;
+    position: absolute;
+    padding-top: 5px;
+    padding-left: 7px;
+    font-size: 15px;
+    width: 240px;
+    font-weight: bold;
+    z-index: 100;
 
 }
+.commentList{
+    position: absolute;
 
-#inputfield_comments{
-
+z-index: 100;
 }

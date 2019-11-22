@@ -21,24 +21,21 @@ const diskStorage = multer.diskStorage({
 const uploader = multer({
     storage: diskStorage,
     limits: {
-        fileSize: 2097152
+        fileSize: 4097152
     }
 });
 
 app.use(express.static("./public"));
 app.use(express.json());
 
-
 app.post("/upload", uploader.single("file"), s3.upload, (req, res) => {
-    const { title, description, username} = req.body;
+    const { title, description, username } = req.body;
     const url = `${s3Url}${req.file.filename}`;
     db.addImage(title, description, username, url).then(({ rows }) =>
         res.json({
             image: rows[0]
         })
-
     );
-
 });
 
 app.get("/images", (req, res) => {
@@ -52,23 +49,31 @@ app.get("/images", (req, res) => {
 
 app.get("/image/:id", (req, res) => {
     console.log("we are at image/ id");
-    let id= req.params.id;
-    db.getSingleImage(id).then(results => {
-        console.log("single image id: ",results);
-        let image = results.rows;
-        res.json(image);
-    });
+    let id = req.params.id;
+    db.getSingleImage(id)
+        .then(result => {
+            db.getComments(id)
+                .then(data => {
+                    res.json({
+                        image: result.rows[0],
+                        comment: data
+                    });
+                })
+                .catch(err => console.log("error at getting a comment: ", err));
+        })
+        .catch(err => console.log("error at getting a comment: ", err));
 });
 
-app.post("/comment/:id", (req, res) => {
+app.post("/comment",(req, res) => {
+    console.log("results from add comments are: ",req.body);
+    const { comment, image_id, username } = req.body;
     console.log("we are at comment");
-    let id= req.params.id;
-    db.addComment(id).then(results => {
-        console.log("single image id: ",results);
-        let comment = results.rows;
-        res.json(comment);
+
+    db.addComments(comment,image_id, username).then(results => {
+        res.json({
+            comment: results[0]
+        });
     });
 });
 
-
-app.listen(8080, () => console.log("images board listening"));
+app.listen(8080, () => console.log("imageboard listening"));

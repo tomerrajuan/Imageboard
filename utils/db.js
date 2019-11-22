@@ -13,20 +13,20 @@ exports.addImage = function(title, description, username, url) {
         [title, description, username, url]
     );
 };
-
-exports.addComment = function(username, image_id, comment) {
-    console.log("adding a comment");
-    return db.query(
-        "INSERT INTO comments (username, image_id, comment) VALUES ($1, $2, $3) WHERE image_id=1$ RETURNING *",
-        [username, image_id, comment]
-    );
-};
 exports.getSingleImage = function(id) {
     console.log("selecting a single image");
     return db.query("SELECT * FROM images WHERE id = $1", [id]);
 };
 
-exports.getSingleComment = function(id) {
+exports.addComments = function(username, image_id, comment) {
+    console.log("adding a comment");
+    return db.query(
+        "INSERT INTO comments (username, image_id, comment) VALUES ($1, $2, $3) RETURNING *",
+        [username, image_id, comment]
+    );
+};
+
+exports.getComments = function(id) {
     console.log("selecting a single comment");
-    return db.query("SELECT * FROM comments WHERE image_id = $1", [id]);
+    return db.query("SELECT * FROM comments WHERE image_id=$1", [id]);
 };

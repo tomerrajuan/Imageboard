@@ -6,8 +6,7 @@ new Vue({
         description: "",
         username: "",
         file: null,
-        currentImage: null
-
+        currentImage: location.hash.slice(1)
     },
     mounted: function() {
         var me = this;
@@ -19,12 +18,20 @@ new Vue({
             })
             .catch(err => console.log("err", err));
     },
+    // function() {
+    // //     window.addEventListener("hashchange", function() {
+    // add an if statement to see if the hash exist.
+    // when the model opens and ask for the image,
+    // if there is no image, it should close itself
+    // //         console.log("new hash is: ");
+    //     });
+    // },
     methods: {
         setCurrentImage: function(id) {
             console.log("id of current image is:", id);
-            this.currentImage=id;
+            this.currentImage = id;
         },
-      
+
         handleClick: function(e) {
             var me = this;
             e.preventDefault();

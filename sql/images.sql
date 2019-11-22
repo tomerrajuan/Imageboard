@@ -16,7 +16,7 @@ DROP TABLE IF EXISTS comments;
 CREATE TABLE comments(
     id SERIAL PRIMARY KEY,
     username VARCHAR(40) NOT NULL,
-    image_id INTEGER NOT NULL UNIQUE,
+    image_id INTEGER NOT NULL,
     comment TEXT,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
