@@ -6,26 +6,31 @@ new Vue({
         description: "",
         username: "",
         file: null,
-        currentImage: location.hash.slice(1)
+        currentImage: location.hash.slice(1),
+        showButton: true,
+        firstId: "",
+        lastImage: ""
     },
     mounted: function() {
         var me = this;
         axios
+
             .get("/images")
             .then(function(response) {
                 console.log("response from images is: ", response.data);
                 me.images = response.data;
             })
             .catch(err => console.log("err", err));
+
+        // window.addEventListener("hashchange", function() {
+        //     var hash =this.currentImage;
+        //     if(this.id)
+        // });
     },
-    // function() {
-    // //     window.addEventListener("hashchange", function() {
     // add an if statement to see if the hash exist.
     // when the model opens and ask for the image,
     // if there is no image, it should close itself
-    // //         console.log("new hash is: ");
-    //     });
-    // },
+
     methods: {
         setCurrentImage: function(id) {
             console.log("id of current image is:", id);
@@ -51,6 +56,37 @@ new Vue({
         handleChange: function(e) {
             console.log("handleChange is happening");
             this.file = e.target.files[0];
+        },
+        getMoreImages: function() {
+            var me = this;
+            let lastImage = me.images[me.images.length - 1].id;
+
+            axios
+                .get("/moreImages/" + lastImage)
+                .then(function(res) {
+                    console.log("response get more images: ", res);
+                    me.firstId = res.data.firstId[0].id;
+                    me.images = me.images.concat(res.data.image);
+                    me.lastImage = me.images[me.images.length - 1].id;
+                    if (me.lastImage === me.firstId) {
+                        me.showButton = false;
+                    }
+                })
+                .catch(err => console.log("error in post upload", err));
         }
     }
 });
+
+// window.onscroll = () => {
+//     console.log("this anscroll" , this);
+//     console.log(document.documentElement.scrollTop,window.innerHeight,document.documentElement.offsetHeight);
+//
+//     let bottomOfWindow =
+//         document.documentElement.scrollTop + window.innerHeight ===
+//         document.documentElement.offsetHeight;
+//
+//
+//
+//     console.log("last image id is", lastImage);
+//
+//     if (bottomOfWindow === true) {

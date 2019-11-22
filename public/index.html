@@ -3,6 +3,7 @@
     <head>
         <title>Imageboard</title>
         <link href="style.css" rel="stylesheet" />
+        <script src="/js/axios.min.js"></script>
         <script src="/js/vue.js"></script>
     </head>
     <body>
@@ -56,15 +57,17 @@
                 <li v-for="image in images" @click="setCurrentImage(image.id)">
                     <div class="black"></div>
                     <p id="title">{{image.title}}</p>
-                    <p>
-                        <img :src="image.url" />
-                    </p>
+
+                        <a :href="'#'+image.id"><img :src="image.url" /></a>
+
+
                 </li>
             </ul>
+            <button class="more" type="button" name="button" v-if="showButton" @click="getMoreImages">Show more results</button>
         </div>
 
         <script type="text/javascript" id="my-template">
-            <div class="modalContainer">
+            <div class="modalContainer" >
 
                <a id="x" href="javascript://" @click="unsetCurrentImage">x</a>
                <img id="modal_img" :src="url">
@@ -73,30 +76,25 @@
                <h3 id="modal_username">{{username}}</h3>
                <h3 id="modal_description">{{description}}</h3>
 
-                   <div class="comments">
+               <div class="comments">
+                    <input id="inputfield_username" v-model="username_comment" type="text" name="username_comment" placeholder="username"></input>
 
-                       <input id="inputfield_username" v-model="username_comment" type="text" name="username_comment" placeholder="username"></input>
+                    <input id="inputfield_comments" v-model="comment_comment" type="text" name="comment_comment" placeholder="your comment"></input>
 
-                       <input id="inputfield_comments" v-model="comment_comment" type="text" name="comment_comment" placeholder="your comment"></input>
+                   <button id="comment" @click="handleAddComments">comment</button>
 
-                           <button id="comment" @click="handleAddComments">
-                             comment
-                           </button>
 
-                      </div>
+                   <ul class="commentList">
+                       <li v-for="comment in comments">
+                           <h1 class="titleComments">{{comment.username}} {{comment.comment}}</h1>
+                       </li>
+                   </ul>
                 </div>
+
+               </div>
         </script>
 
-        <div>
-            <ul class="commentList">
-                <li v-for="comment in comments">
-                    <h1 id="titleComments">{{comment.comment}}</h1>
-                    <h1 id="titleComments"></h1>
-                </li>
-            </ul>
-        </div>
 
-        <script src="/js/axios.min.js"></script>
         <script src="/js/script.js"></script>
         <script src="/js/components.js"></script>
     </body>
