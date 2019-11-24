@@ -57,9 +57,7 @@
                 <li v-for="image in images" @click="setCurrentImage(image.id)">
                     <div class="black"></div>
                     <p id="title">{{image.title}}</p>
-
                         <a :href="'#'+image.id"><img :src="image.url" /></a>
-
 
                 </li>
             </ul>
@@ -69,29 +67,37 @@
         <script type="text/javascript" id="my-template">
             <div class="modalContainer" >
 
+            <div class="imgContainer" >
+
+
                <a id="x" href="javascript://" @click="unsetCurrentImage">x</a>
+               <img id="menu" src="hamburgermenu.svg" alt="" @click.prevent.default="menu">
                <img id="modal_img" :src="url">
 
-               <h1 id="modal_title">{{title}}</h1>
-               <h3 id="modal_username">{{username}}</h3>
-               <h3 id="modal_description">{{description}}</h3>
 
-               <div class="comments">
-                    <input id="inputfield_username" v-model="username_comment" type="text" name="username_comment" placeholder="username"></input>
+                    <div class="comments">
+                        <input class="inputfields_modal" v-model="username_comment" type="text" name="username_comment" placeholder="username"></input>
+                        <input id="inputfields_modalComment" v-model="comment_comment" type="text" name="comment_comment" placeholder="your comment"></input>
+                        <button id="comment" @click="handleAddComments">Send</button>
 
-                    <input id="inputfield_comments" v-model="comment_comment" type="text" name="comment_comment" placeholder="your comment"></input>
+            </div>
 
-                   <button id="comment" @click="handleAddComments">comment</button>
+            <div class="InfoAndComments" >
 
+                <h1 id="modal_title">Title: {{title}}</h1>
+                <h3 id="modal_description">Description: {{description}}</h3>
+                <h3 id="modal_username">By: {{username}}</h3>
 
-                   <ul class="commentList">
-                       <li v-for="comment in comments">
-                           <h1 class="titleComments">{{comment.username}} {{comment.comment}}</h1>
-                       </li>
-                   </ul>
+                             <ul class="commentsList">
+                                <li v-for="comment in comments">
+                                <h2 class="titleComment">{{comment.username}}:</h2>
+                                     <p>{{comment.comment}}</p>
+                                </li>
+                            </ul>
+                    </div>
                 </div>
 
-               </div>
+         </div>
         </script>
 
 

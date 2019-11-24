@@ -40,18 +40,22 @@ new Vue({
         handleClick: function(e) {
             var me = this;
             e.preventDefault();
-
-            var fd = new FormData();
-            fd.append("file", this.file);
-            fd.append("title", this.title);
-            fd.append("description", this.description);
-            fd.append("username", this.username);
-            axios
-                .post("/upload", fd)
-                .then(function(response) {
-                    me.images.unshift(response.data.image);
-                })
-                .catch(err => console.log("error in post upload", err));
+            if (!this.title) {
+                alert("Please Enter a title!");
+                return false;
+            } else {
+                var fd = new FormData();
+                fd.append("file", this.file);
+                fd.append("title", this.title);
+                fd.append("description", this.description);
+                fd.append("username", this.username);
+                axios
+                    .post("/upload", fd)
+                    .then(function(response) {
+                        me.images.unshift(response.data.image);
+                    })
+                    .catch(err => console.log("error in post upload", err));
+            }
         },
         handleChange: function(e) {
             console.log("handleChange is happening");
@@ -73,6 +77,9 @@ new Vue({
                     }
                 })
                 .catch(err => console.log("error in post upload", err));
+        },
+        menu: function(e) {
+            console.log(e);
         }
     }
 });
